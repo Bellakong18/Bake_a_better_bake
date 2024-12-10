@@ -32,15 +32,15 @@ buffer = io.BytesIO()
 qr.make_image(fill_color="black", back_color="white").save(buffer, format="PNG")
 buffer.seek(0)
 
-st.write(f"To share with other please use this URL: {url}")
+
 
 
 baked_goods_dataset = pd.read_csv('categorized_baked_goods_dataset_final.csv', encoding='latin1')
 
 
 
-st.title("Bake a better Bake: ABaked Goods Ratio Optimizer")
-
+st.title("Bake a Better Bake: ABaked Goods Ratio Optimizer")
+st.write(f"To share with other please use this URL: {url}")
 
 
 baked_goods_images = {
