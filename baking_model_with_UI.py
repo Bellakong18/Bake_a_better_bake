@@ -51,7 +51,7 @@ baked_goods_images = {
     "Vegan Vanilla Cupcake": "https://images.immediate.co.uk/production/volatile/sites/30/2022/01/Vegan-Vanilla-Cupcakes-f5c67f8.jpg?resize=768,574",
     "Gluten Free Vanilla Cupcake": "https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/gluten-free_vanilla_98272_16x9.jpg",
     "Chocolate Cupcake": "https://thebusybaker.ca/wp-content/uploads/2019/09/best-ever-from-scratch-chocolate-cupcakes-fb-ig-3.jpg",
-    "Vegan Chocolate Cupcake": "https://www.fearlessdining.com/wp-content/uploads/2020/12/chocolate-cupcakes-hero-1200-500x375.jpg",
+    "Vegan Chocolate Cupcake": "https://www.yummymummykitchen.com/wp-content/uploads/2021/02/vegan-chocolate-cupcakes-05-720x720.jpg",
     "Gluten Free Chocolate Cupcake": "https://static01.nyt.com/images/2024/09/26/multimedia/Vegan-Chocolate-Cupcakesrex-fgpv/Vegan-Chocolate-Cupcakesrex-fgpv-threeByTwoMediumAt2X.jpg",
     "Chocolate Chip Cookies": "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-threeByTwoMediumAt2X.jpg",
     "Vegan Chocolate Chip Cookie": "https://anotherveganfoodblog.com/wp-content/uploads/2023/12/final-aerial-horizontal-1-1024x683.webp",
