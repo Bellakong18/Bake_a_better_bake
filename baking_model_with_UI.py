@@ -39,7 +39,7 @@ baked_goods_dataset = pd.read_csv('categorized_baked_goods_dataset_final.csv', e
 
 
 
-st.title("Bake a Better Bake: ABaked Goods Ratio Optimizer")
+st.title("Bake a Better Bake: A Baked Goods Ratio Optimizer")
 st.write(f"To share with other please use this URL: {url}")
 
 
