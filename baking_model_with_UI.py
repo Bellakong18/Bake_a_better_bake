@@ -16,7 +16,7 @@ import io
 
 server_ip = "192.168.1.255"
 port = "8800"
-url = "https://bake-a-better-bake-capstone.streamlit.app/"
+url = "https://bakeabetterbake.streamlit.app/"
 
 qr = qrcode.QRCode(
     version=1,
