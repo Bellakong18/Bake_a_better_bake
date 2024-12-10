@@ -98,7 +98,7 @@ else:
     texture_encoded = mlb.fit_transform(filtered_dataset['texture_category_list'])
     texture_encoded_df = pd.DataFrame(texture_encoded, columns=mlb.classes_)
 
-    encoder = OneHotEncoder(sparse=False, handle_unknown='ignore')
+    encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
     type_encoded = encoder.fit_transform(filtered_dataset[['type']])
 
     scaler = StandardScaler()
