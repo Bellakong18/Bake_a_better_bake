@@ -181,6 +181,44 @@ else:
             st.subheader( "Chef tips for added indulgences")
             mix_in_tips = ", ".join(chef_tips[input_type])
             st.write(f"Enhance your {input_type.lower()} with: {mix_in_tips}")
+        
+        ratio_options = ['flour_ratio', 'sugar_ratio', 'Butter_ratio']
+        selected_ratios = st.multiselect(
+            "select two ratios to plot:", 
+            options=ratio_options, 
+            default= ['flour_ratio', 'sugar_ratio']
+        )
+        if len(selected_ratios) == 2: 
+            ratio_x = selected_ratios[0]
+            ratio_y = selected_ratios[1]
+
+            x_ratios = filtered_dataset[ratio_x]
+            y_ratios = filtered_dataset[ratio_y]
+
+            fig1, ax = plt.subplots(figsize=(12,8))
+            ax.scatter(x_ratios, y_ratios, c='pink', label=" Data Points", alpha=0.6)
+        if total_cups > 0:
+            optimized_x = optimized_ratios[ratio_options.index(ratio_x)] * total_cups / sum(optimized_ratios)
+            optimized_y = optimized_ratios[ratio_options.index(ratio_y)] * total_cups / sum(optimized_ratios)
+            
+            ax.scatter(
+                optimized_x, 
+                optimized_y, 
+                c='red', 
+                s=150, 
+                label="Optimized Ratio", 
+                edgecolors="black", 
+                linewidth= 1.5 
+            )
+        ax.set_xlabel(ratio_x.replace('_', ' ').capitalize())
+        ax.set_ylabel(ratio_y.replace('_', ' ').capitalize())
+        ax.set_title(f'{ratio_x.replace('_', ' ').capitalize()} vs. {ratio_y.replace("_", " ").capitalize()} for {input_type}')
+        ax.legend()
+
+        st.plot(fig1)
+    else: 
+        st.warning("Please select exactly two ratios to plot.")
+    
 
 
         
