@@ -128,7 +128,7 @@ else:
     X = np.hstack((type_encoded, texture_encoded, normalized_ratios))
     y = filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']].values
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
     st.write(f"Training data shape: {X_train.shape}, Test data shape: {X_test.shape}")
 
     random_forest_model = MultiOutputRegressor(RandomForestRegressor(n_estimators=100, random_state=42))
