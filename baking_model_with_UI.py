@@ -200,18 +200,23 @@ else:
             if len(selected_ratios) == 1:
                 selected_ratio = selected_ratios[0]
                 fig1, ax1 = plt.subplots(figsize=(12,8))
+
+                if total_cups > 0:
+                    optimized_ratio = optimized_ratios[ratio_options.index(selected_ratio)] * total_cups / sum(optimized_ratios)
+                else:
+                    optimized_ratio = None
                 ax1.scatter(
-                    filtered_dataset.index, 
+                    [optimized_ratio]* len(filtered_dataset),
                     filtered_dataset[selected_ratio], 
                     color='purple', 
                     label="Recipe Data Points", 
                     alpha=0.6
                 )
-                if total_cups > 0: 
-                    optimized_ratio = optimized_ratios[ratio_options.index(selected_ratio)] * total_cups / sum(optimized_ratios)
+                
+                if optimized_ratio is not None:
                     ax1.scatter(
-                        [filtered_dataset.index[-1] + 1],
                         [optimized_ratio],
+                        filtered_dataset[selected_ratio].mean()]
                         color='red', 
                         label="Optimized Ratio",
                         s=150,
