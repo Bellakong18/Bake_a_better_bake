@@ -207,6 +207,17 @@ else:
                     label="Recipe Data Points", 
                     alpha=0.6
                 )
+                if total_cups > 0: 
+                    optimized_ratio = optimized_ratios[ratio_options.index(selected_ratio)] * total_cups / sum(optimized_ratios)
+                    ax1.scatter(
+                        [filtered_dataset.index[-1] + 1],
+                        [optimized_ratio],
+                        color='red', 
+                        label='Optimized Ratio",
+                        s=150,
+                        edgecolors="black",
+                        linewidth=1.5
+                    )
                 ax1.set_ylim(filtered_dataset[selected_ratio].min(), filtered_dataset[selected_ratio].max())
                 ax1.set_xlabel("Index")
                 ax1.set_ylabel(selected_ratio.replace('_', ' ').capitalize())
