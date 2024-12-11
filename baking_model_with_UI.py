@@ -212,7 +212,7 @@ else:
                 ax1.set_ylabel(selected_ratio.replace('_', ' ').capitalize())
                 ax1.set_title(f"Scatter Plot of {selected_ratio.replace('_', ' ').capitalize()} vs Index")
                 ax1.legend()
-                st.plot(fig1)
+                st.pyplot(fig1)
 
             elif len(selected_ratios) == 2: 
                 ratio_x = selected_ratios[0]
