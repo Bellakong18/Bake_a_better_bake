@@ -161,8 +161,6 @@ else:
         user_input = np.hstack((type_encoded[0], user_input_texture[0], example_base_ratios[0]))
         user_input = user_input.reshape(1, -1)
 
-
-
         predicted_ratios = random_forest_model.predict(user_input)
         optimized_ratios = scaler.inverse_transform(predicted_ratios)[0]
 
@@ -195,12 +193,28 @@ else:
         if graph_options == "Optimized Values vs Recipe Data":
             ratio_options = ['flour_ratio', 'sugar_ratio', 'Butter_ratio']
             selected_ratios = st.multiselect(
-                "Select two ratios to plot:", 
+                "Select up to two ratios to plot:", 
                 options=ratio_options, 
                 default=['flour_ratio', 'sugar_ratio']
             )
-        
-            if len(selected_ratios) == 2: 
+            if len(selected_ratios) == 1:
+                selected_ratio = selected_ratios[0]
+                fig1, ax1 = plt.subplots(figsize=(12,8))
+                ax1.scatter(
+                    filtered_dataset.index, 
+                    filtered_dataset[selected_ratio], 
+                    color='purple', 
+                    label="Recipe Data Points", 
+                    alpha=0.6
+                )
+                ax.set_ylim(filtered_dataset[selected_ratio].min(), filtered_dataset[selected_ratio].max())
+                ax.set_xlabel("Index")
+                ax.set_ylabel(selected_ratio.replace('_', ' ').capitalize())
+                ax.set_title(f"Scatter Plot of {selected_ratio.replace('_', ' ').capitalize()} vs Index")
+                ax.legend()
+                st.plot(fig1)
+
+            elif len(selected_ratios) == 2: 
                 ratio_x = selected_ratios[0]
                 ratio_y = selected_ratios[1]
         
@@ -223,7 +237,7 @@ else:
                         edgecolors="black", 
                         linewidth=1.5
                     )
-        
+                ax1.set_ylim(y_ratios.min(), y_ratios.max())
                 ax1.set_xlabel(ratio_x.replace('_', ' ').capitalize())
                 ax1.set_ylabel(ratio_y.replace('_', ' ').capitalize())
                 ax1.set_title(f"{ratio_x.replace('_', ' ').capitalize()} vs. {ratio_y.replace('_', ' ').capitalize()}")
