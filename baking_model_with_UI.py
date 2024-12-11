@@ -179,11 +179,11 @@ else:
             st.write(f"Optimized Flour Measurement: {optimized_flour_grams:.2f} grams")
             st.write(f"Optimized Sugar Measurement: {optimized_sugar_grams:.2f} grams")
             st.write(f"Optimized Butter Measurement: {optimized_butter_grams:.2f} grams")
-  
-       if input_type in chef_tips: 
-           st.subheader( "Chef tips for added indulgences")
-           mix_in_tips = ",".join(chef_tips[input_type])
-           st.write(f"Enhance your {input_type.lower()}")
+        
+        if input_type in chef_tips: 
+            st.subheader( "Chef tips for added indulgences")
+            mix_in_tips = ",".join(chef_tips[input_type])
+            st.write(f"Enhance your {input_type.lower()}")
 
 
         
