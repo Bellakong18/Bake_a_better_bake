@@ -87,7 +87,7 @@ chef_tips = {
 }
 
 if input_type in baked_goods_images:
-    st.image(baked_goods_images[input_type], caption=input_type, use_column_width=True)
+    st.image(baked_goods_images[input_type], caption=input_type, use_container_width=True)
 else:
     st.warning("Image not available for this baked good.")
 
