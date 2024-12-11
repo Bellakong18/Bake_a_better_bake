@@ -65,7 +65,33 @@ baked_goods_options = [
     "Chocolate Chip Cookies", "Vegan Chocolate Chip Cookie", "Gluten Free Chocolate Chip Cookie"
 ]
 
+   
 input_type = st.selectbox("Select a baked good:", baked_goods_options)
+
+gluten_free_options = [ 
+    "Gluten Free Brownie", "Gluten Free Vanilla Cupcake","Gluten Free Chocolate Cupcake","Gluten Free Chocolate Chip Cookie"]
+
+
+input_type = st.selectbox("Select a baked good:", baked_goods_options)
+
+chef_tips = {
+   "Brownie":["nuts", "Oreos", "espresso powder", "caramel", "Cheesecake"],
+    "Gluten Free Brownie":["Dried Fruit", "White chocolate chips", "Jam", "candied fruit"],  
+    "Vegan Brownie":["Peanut butter", "Coconut flakes", "crushed pretzels"] ,
+    "Vanilla Cupcake":["Sprinkles", "Lemon zest", " chocolate chips", "ganache"] ,
+    "Vegan Vanilla Cupcake": ["Sprinkles", "Lemon zest", " chocolate chips", "coconut", "", "pistachio butter"],
+    "Gluten Free Vanilla Cupcake":["Fruit compote"," caramel ganache","passion fruit curd", "chcolate drizzle"] ,
+    "Chocolate Cupcake":["orange zest", "nutella", "baileys","crushed pepermint" ] ,
+    "Vegan Chocolate Cupcake": ["vegan sprinkles", "jams", "vegan marshmallows","praline"],
+    "Gluten Free Chocolate Cupcake":["strawberry compote", "vanilla paste", "frangipane"," chocolate covered strawberries"] ,
+    "Chocolate Chip Cookies":["flaky salt", " toffee", "shaved chocolate", "crushed potato chips", "butterscotch", "chocolate candies"] ,
+    "Vegan Chocolate Chip Cookie":["flaky salt", "almond slivers", "dried cranberries", "candied ginger"] ,
+    "Gluten Free Chocolate Chip Cookie":["flaky salt", "smoked salt", "pumpkin spice", "raisins", "chocolate covered fruit"] 
+}
+ if input_type in chef_tips: 
+    st.subheader( "Chef tips for added indulgences")
+    mix_in_tips = ",".join(chef_tips[input_type])
+    st.write(f"Enhance your {input_type.lower()}")
 
 if input_type in baked_goods_images:
     st.image(baked_goods_images[input_type], caption=input_type, use_column_width=True)
@@ -157,7 +183,8 @@ else:
             st.write(f"Optimized Flour Measurement: {optimized_flour_grams:.2f} grams")
             st.write(f"Optimized Sugar Measurement: {optimized_sugar_grams:.2f} grams")
             st.write(f"Optimized Butter Measurement: {optimized_butter_grams:.2f} grams")
-
+  
+   
 
         
         fig, ax = plt.subplots(3, 1, figsize=(12, 18))
