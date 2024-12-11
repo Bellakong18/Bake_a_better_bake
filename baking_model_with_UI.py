@@ -59,10 +59,10 @@ baked_goods_images = {
 }
 
 baked_goods_options = [
-    "Brownie", "Gluten Free Brownie", "Vegan Brownie",
+    "Chocolate Chip Cookies", "Vegan Chocolate Chip Cookie", "Gluten Free Chocolate Chip Cookie",
     "Vanilla Cupcake", "Gluten Free Vanilla Cupcake", "Vegan Vanilla Cupcake", 
     "Chocolate Cupcake", "Vegan Chocolate Cupcake", "Gluten Free Chocolate Cupcake", 
-    "Chocolate Chip Cookies", "Vegan Chocolate Chip Cookie", "Gluten Free Chocolate Chip Cookie"
+    "Brownie", "Gluten Free Brownie", "Vegan Brownie"
 ]
 
    
@@ -128,8 +128,7 @@ else:
     X = np.hstack((type_encoded, texture_encoded, normalized_ratios))
     y = filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']].values
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
-    st.write(f"Training data shape: {X_train.shape}, Test data shape: {X_test.shape}")
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     random_forest_model = MultiOutputRegressor(RandomForestRegressor(n_estimators=100, random_state=42))
     random_forest_model.fit(X_train, y_train)
@@ -148,7 +147,7 @@ else:
     sugar_cups = st.number_input("Enter the sugar amount in cups:", min_value=0.0, step=0.1)
     butter_cups = st.number_input("Enter the butter amount in cups:", min_value=0.0, step=0.1)
 
-    unit = st.selectbox("Select unit of measurement:", ["Cups", "Grams"])
+    unit = st.selectbox("Select unit of measurement:", ["Grams","Cups"])
 
     total_cups = flour_cups + sugar_cups + butter_cups
     if total_cups > 0:
@@ -166,8 +165,6 @@ else:
 
         predicted_ratios = random_forest_model.predict(user_input)
         optimized_ratios = scaler.inverse_transform(predicted_ratios)[0]
-        st.write(f"Predicted ratios: {predicted_ratios}")
-        st.write(f"Optimized ratios (inverted scaling): {optimized_ratios}")
 
         optimized_flour_cups = optimized_ratios[0] * total_cups / sum(optimized_ratios)
         optimized_sugar_cups = optimized_ratios[1] * total_cups / sum(optimized_ratios)
