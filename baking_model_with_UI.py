@@ -213,7 +213,7 @@ else:
                         [filtered_dataset.index[-1] + 1],
                         [optimized_ratio],
                         color='red', 
-                        label='Optimized Ratio",
+                        label="Optimized Ratio",
                         s=150,
                         edgecolors="black",
                         linewidth=1.5
