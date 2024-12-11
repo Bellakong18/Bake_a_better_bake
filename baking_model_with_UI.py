@@ -207,11 +207,11 @@ else:
                     label="Recipe Data Points", 
                     alpha=0.6
                 )
-                ax.set_ylim(filtered_dataset[selected_ratio].min(), filtered_dataset[selected_ratio].max())
-                ax.set_xlabel("Index")
-                ax.set_ylabel(selected_ratio.replace('_', ' ').capitalize())
-                ax.set_title(f"Scatter Plot of {selected_ratio.replace('_', ' ').capitalize()} vs Index")
-                ax.legend()
+                ax1.set_ylim(filtered_dataset[selected_ratio].min(), filtered_dataset[selected_ratio].max())
+                ax1.set_xlabel("Index")
+                ax1.set_ylabel(selected_ratio.replace('_', ' ').capitalize())
+                ax1.set_title(f"Scatter Plot of {selected_ratio.replace('_', ' ').capitalize()} vs Index")
+                ax1.legend()
                 st.plot(fig1)
 
             elif len(selected_ratios) == 2: 
