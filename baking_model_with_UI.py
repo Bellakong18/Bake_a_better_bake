@@ -220,11 +220,10 @@ else:
                 ax1.set_title(f"{ratio_x.replace('_', ' ').capitalize()} vs. {ratio_y.replace('_', ' ').capitalize()}")
                 ax1.legend()
                 st.pyplot(fig1)
-        
-            else:
-                st.warning("Please select exactly two ratios to plot.")
-        
-        elif graph_options == "Overall Ratio Model":
+        else:
+            st.warning("Please select exactly two ratios to plot.")
+
+elif graph_options == "Overall Ratio Model":
             fig, ax = plt.subplots(3, 1, figsize=(12, 18))
         
             sns.histplot(filtered_dataset['flour_ratio'], color='blue', label='Flour Ratio', kde=True, ax=ax[0])
@@ -240,6 +239,10 @@ else:
             ax[2].set_title('Distribution of Butter Ratios')
         
             st.pyplot(fig)
+        
+            
+        
+        
 
 
 
