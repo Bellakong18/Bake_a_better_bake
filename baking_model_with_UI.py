@@ -187,7 +187,7 @@ else:
         )
         
         if graph_options == "Optimized Values vs Recipe Data":
-            ratio_options = ['flour_ratio', 'sugar_ratio', 'butter_ratio']
+            ratio_options = ['flour_ratio', 'sugar_ratio', 'Butter_ratio']
             selected_ratios = st.multiselect(
                 "Select two ratios to plot:", 
                 options=ratio_options, 
@@ -233,16 +233,19 @@ else:
             sns.histplot(y_pred_rf[:, 0], color='red', label='Predicted Flour Ratio', kde=True, ax=ax[0])
             ax[0].set_xlabel('Flour Ratio')
             ax[0].set_title('Distribution of Flour Ratios')
+            ax[0].legend()
         
-            sns.histplot(y_test[:, 1], color='green', label='Actual Sugar Ratio', kde=True, ax=ax[1])
-            sns.histplot(y_pred_rf[:, 1], color='orange', label='Predicted Sugar Ratio', kde=True, ax=ax[1])
+            sns.histplot(y_test[:, 1], color='blue', label='Actual Sugar Ratio', kde=True, ax=ax[1])
+            sns.histplot(y_pred_rf[:, 1], color='red', label='Predicted Sugar Ratio', kde=True, ax=ax[1])
             ax[1].set_xlabel('Sugar Ratio')
             ax[1].set_title('Distribution of Sugar Ratios')
+            ax[1].legend()
         
-            sns.histplot(y_test[:, 2], color='purple', label='Actual Butter Ratio', kde=True, ax=ax[2])
-            sns.histplot(y_pred_rf[:, 2], color='yellow', label='Predicted Butter Ratio', kde=True, ax=ax[2])
+            sns.histplot(y_test[:, 2], color='blue', label='Actual Butter Ratio', kde=True, ax=ax[2])
+            sns.histplot(y_pred_rf[:, 2], color='red', label='Predicted Butter Ratio', kde=True, ax=ax[2])
             ax[2].set_xlabel('Butter Ratio')
             ax[2].set_title('Distribution of Butter Ratios')
+            ax[2].legend()
         
             st.pyplot(fig)
                 
