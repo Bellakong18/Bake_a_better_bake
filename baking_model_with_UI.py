@@ -224,7 +224,7 @@ else:
                         linewidth=1.5
                     )
                 ax1.set_ylim(filtered_dataset[selected_ratio].min(), filtered_dataset[selected_ratio].max())
-                ax1.set_xlabel("Index")
+                ax1.set_xlabel("Optimized_ratio")
                 ax1.set_ylabel(selected_ratio.replace('_', ' ').capitalize())
                 ax1.set_title(f"Scatter Plot of {selected_ratio.replace('_', ' ').capitalize()} vs Predicted ratio ")
                 ax1.legend()
