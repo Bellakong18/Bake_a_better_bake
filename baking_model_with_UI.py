@@ -220,7 +220,7 @@ else:
             if ratio_x == "Butter_ratio":
                 ax1.axvspan(0.5, 1.5, color='yellow', alpha=.2, label="Optimal Butter Range")
             if ratio_x == "sugar_ratio": 
-                ax1.axhspan(2.0, 3.5, color='lightblue', alpha.2, label="Optimal Sugar Range")
+                ax1.axhspan(2.0, 3.5, color='lightblue', alpha=.2, label="Optimal Sugar Range")
             ax1.set_xlabel(ratio_x.replace('_', ' ').capitalize())
             ax1.set_ylabel(ratio_y.replace('_', ' ').capitalize())
             ax1.set_title(f'{ratio_x.replace('_', ' ').capitalize()} vs. {ratio_y.replace("_", " ").capitalize()} for {input_type}')
