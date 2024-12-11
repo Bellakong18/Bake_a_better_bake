@@ -179,8 +179,8 @@ else:
         
         if input_type in chef_tips: 
             st.subheader( "Chef tips for added indulgences")
-            mix_in_tips = ",".join(chef_tips[input_type])
-            st.write(f"Enhance your {input_type.lower()}")
+            mix_in_tips = ", ".join(chef_tips[input_type])
+            st.write(f"Enhance your {input_type.lower()} with: {mix_in_tips}")
 
 
         
