@@ -216,7 +216,7 @@ else:
                 if optimized_ratio is not None:
                     ax1.scatter(
                         [optimized_ratio],
-                        filtered_dataset[selected_ratio].mean()]
+                        filtered_dataset[selected_ratio].mean()],
                         color='red', 
                         label="Optimized Ratio",
                         s=150,
