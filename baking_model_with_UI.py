@@ -204,7 +204,7 @@ else:
                 y_ratios = filtered_dataset[ratio_y]
                 
                 ax.scatter(x_ratios, y_ratios, c='purple', label=" Recipe Data Points", alpha=0.6)
-                if total_cups > 0:
+            if total_cups > 0:
                 optimized_x = optimized_ratios[ratio_options.index(ratio_x)] * total_cups / sum(optimized_ratios)
                 optimized_y = optimized_ratios[ratio_options.index(ratio_y)] * total_cups / sum(optimized_ratios)
             
