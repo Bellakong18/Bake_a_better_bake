@@ -36,7 +36,7 @@ buffer.seek(0)
 
 
 baked_goods_dataset = pd.read_csv('categorized_baked_goods_dataset_final.csv', encoding='latin1')
-
+baked_goods_dataset['texture_category'] = baked_goods_dataset['texture_category'].str.lower()
 
 
 st.title("Bake a Better Bake: A Baked Goods Ratio Optimizer")
