@@ -93,8 +93,11 @@ else:
 
 filtered_dataset = baked_goods_dataset.loc[baked_goods_dataset['type'] == input_type].copy()
 filtered_dataset['flour_ratio'] = filtered_dataset['flour_ratio'].astype(float)
+st.write("Filtered dataset for selected baked good type:")
+st.write(filtered_dataset.head())
 scaler = StandardScaler()
 normalized_ratios = scaler.fit_transform(filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']])
+st.write(f"Normalized ratios: {normalized_ratios}")
 print(filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']].isnull().sum())
 print(filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']].dtypes)
 print(filtered_dataset['flour_ratio'].unique())
@@ -111,6 +114,7 @@ else:
     filtered_dataset['texture_category_list'] = filtered_dataset['texture_category'].apply(lambda x: x.split(','))
     unique_textures = sorted(set([texture for texture_list in filtered_dataset['texture_category_list'] for texture in texture_list]))
     input_texture = st.selectbox("Select a desired texture:", unique_textures)
+    st.write(f"Selected texture: {input_texture}")
 
     mlb = MultiLabelBinarizer()
     texture_encoded = mlb.fit_transform(filtered_dataset['texture_category_list'])
@@ -126,6 +130,8 @@ else:
     y = filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']].values
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    st.write(f"First row of X_train: {X_train[0]}")
+    st.write(f"X_train shape: {X_train.shape}")
 
     random_forest_model = MultiOutputRegressor(RandomForestRegressor(n_estimators=100, random_state=42))
     random_forest_model.fit(X_train, y_train)
@@ -145,14 +151,6 @@ else:
 
     unit = st.selectbox("Select unit of measurement:", ["Cups", "Grams"])
 
-st.write(f"Selected texture: {input_texture}")
-user_input_texture = mlb.transform([[input_texture]])
-st.write(f"Encoded texture: {user_input_texture}")
-st.write(f"user_input shape: {user_input.shape}")
-st.write(f"First row of X_train: {X_train[0]}")
-X = np.hstack((type_encoded, texture_encoded, normalized_ratios))
-
-
     total_cups = flour_cups + sugar_cups + butter_cups
     if total_cups > 0:
         flour_ratio = flour_cups / total_cups
@@ -161,11 +159,18 @@ X = np.hstack((type_encoded, texture_encoded, normalized_ratios))
 
         example_base_ratios = scaler.transform([[flour_ratio, sugar_ratio, butter_ratio]])
         user_input_texture = mlb.transform([[input_texture]])
+        user_input_texture = mlb.transform([[input_texture]])
+        st.write(f"Encoded texture (MLB): {user_input_texture}")
         user_input = np.hstack((type_encoded[0], user_input_texture[0], example_base_ratios[0]))
         user_input = user_input.reshape(1, -1)
+        st.write(f"user_input (features for prediction): {user_input}")
+        st.write(f"user_input shape: {user_input.shape}")
+
 
         predicted_ratios = random_forest_model.predict(user_input)
         optimized_ratios = scaler.inverse_transform(predicted_ratios)[0]
+        st.write(f"Predicted ratios: {predicted_ratios}")
+        st.write(f"Optimized ratios (inverted scaling): {optimized_ratios}")
 
         optimized_flour_cups = optimized_ratios[0] * total_cups / sum(optimized_ratios)
         optimized_sugar_cups = optimized_ratios[1] * total_cups / sum(optimized_ratios)
