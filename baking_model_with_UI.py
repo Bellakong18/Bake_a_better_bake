@@ -187,12 +187,14 @@ else:
         )
         
         if graph_options == "Optimized Values vs Recipe Data":
+            ratio_options = ['flour_ratio', 'sugar_ratio', 'butter_ratio']
             selected_ratios = st.multiselect(
-                "Select two ratios to plot:",
-                options=ratio_options,
+                "Select two ratios to plot:", 
+                options=ratio_options, 
                 default=['flour_ratio', 'sugar_ratio']
             )
-        if len(selected_ratios) == 2:
+        
+            if len(selected_ratios) == 2: 
                 ratio_x = selected_ratios[0]
                 ratio_y = selected_ratios[1]
         
@@ -203,16 +205,17 @@ else:
                 ax1.scatter(x_ratios, y_ratios, c='purple', label="Recipe Data Points", alpha=0.6)
         
                 if total_cups > 0:
-                    optimized_x = eval(ratio_x)
-                    optimized_y = eval(ratio_y)
+                    optimized_x = optimized_ratios[ratio_options.index(ratio_x)] * total_cups / sum(optimized_ratios)
+                    optimized_y = optimized_ratios[ratio_options.index(ratio_y)] * total_cups / sum(optimized_ratios)
+        
                     ax1.scatter(
-                        optimized_x,
-                        optimized_y,
-                        c='red',
-                        s=150,
-                        label="Optimized Ratio",
-                        edgecolors="black",
-                        linewidth=1.5,
+                        optimized_x, 
+                        optimized_y, 
+                        c='red', 
+                        s=150, 
+                        label="Optimized Ratio", 
+                        edgecolors="black", 
+                        linewidth=1.5
                     )
         
                 ax1.set_xlabel(ratio_x.replace('_', ' ').capitalize())
@@ -220,29 +223,27 @@ else:
                 ax1.set_title(f"{ratio_x.replace('_', ' ').capitalize()} vs. {ratio_y.replace('_', ' ').capitalize()}")
                 ax1.legend()
                 st.pyplot(fig1)
-        else:
-            st.warning("Please select exactly two ratios to plot.")
-
-elif graph_options == "Overall Ratio Model":
+            else:
+                st.warning("Please select exactly two ratios to plot.")
+        
+        elif graph_options == "Overall Ratio Model":
             fig, ax = plt.subplots(3, 1, figsize=(12, 18))
         
-            sns.histplot(filtered_dataset['flour_ratio'], color='blue', label='Flour Ratio', kde=True, ax=ax[0])
+            sns.histplot(y_test[:, 0], color='blue', label='Actual Flour Ratio', kde=True, ax=ax[0])
+            sns.histplot(y_pred_rf[:, 0], color='red', label='Predicted Flour Ratio', kde=True, ax=ax[0])
             ax[0].set_xlabel('Flour Ratio')
             ax[0].set_title('Distribution of Flour Ratios')
         
-            sns.histplot(filtered_dataset['sugar_ratio'], color='green', label='Sugar Ratio', kde=True, ax=ax[1])
+            sns.histplot(y_test[:, 1], color='green', label='Actual Sugar Ratio', kde=True, ax=ax[1])
+            sns.histplot(y_pred_rf[:, 1], color='orange', label='Predicted Sugar Ratio', kde=True, ax=ax[1])
             ax[1].set_xlabel('Sugar Ratio')
             ax[1].set_title('Distribution of Sugar Ratios')
         
-            sns.histplot(filtered_dataset['Butter_ratio'], color='orange', label='Butter Ratio', kde=True, ax=ax[2])
+            sns.histplot(y_test[:, 2], color='purple', label='Actual Butter Ratio', kde=True, ax=ax[2])
+            sns.histplot(y_pred_rf[:, 2], color='yellow', label='Predicted Butter Ratio', kde=True, ax=ax[2])
             ax[2].set_xlabel('Butter Ratio')
             ax[2].set_title('Distribution of Butter Ratios')
         
             st.pyplot(fig)
-        
-            
-        
-        
-
-
+                
 
