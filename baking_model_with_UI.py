@@ -71,9 +71,6 @@ input_type = st.selectbox("Select a baked good:", baked_goods_options)
 gluten_free_options = [ 
     "Gluten Free Brownie", "Gluten Free Vanilla Cupcake","Gluten Free Chocolate Cupcake","Gluten Free Chocolate Chip Cookie"]
 
-
-input_type = st.selectbox("Select a baked good:", baked_goods_options)
-
 chef_tips = {
    "Brownie":["nuts", "Oreos", "espresso powder", "caramel", "Cheesecake"],
     "Gluten Free Brownie":["Dried Fruit", "White chocolate chips", "Jam", "candied fruit"],  
