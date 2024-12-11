@@ -145,6 +145,13 @@ else:
 
     unit = st.selectbox("Select unit of measurement:", ["Cups", "Grams"])
 
+st.write(f"Selected texture: {input_texture}")
+user_input_texture = mlb.transform([[input_texture]])
+st.write(f"Encoded texture: {user_input_texture}")
+st.write(f"user_input shape: {user_input.shape}")
+st.write(f"First row of X_train: {X_train[0]}")
+X = np.hstack((type_encoded, texture_encoded, normalized_ratios))
+
 
     total_cups = flour_cups + sugar_cups + butter_cups
     if total_cups > 0:
