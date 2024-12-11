@@ -128,19 +128,16 @@ else:
     X = np.hstack((type_encoded, texture_encoded, normalized_ratios))
     y = filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']].values
 
-    test_sizes = [0.1, 0.2, 0.4]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    st.write(f"Training data shape: {X_train.shape}, Test data shape: {X_test.shape}")
 
-    for test_size in test_sizes:
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
-        print(f"Test size: {test_size}, Training data shape: {X_train.shape}, Testing data shape: {X_test.shape}")
+    random_forest_model = MultiOutputRegressor(RandomForestRegressor(n_estimators=100, random_state=42))
+    random_forest_model.fit(X_train, y_train)
 
-        random_forest_model = MultiOutputRegressor(RandomForestRegressor(n_estimators=100, random_state=42))
-        random_forest_model.fit(X_train, y_train)
-    
-        y_pred_rf = random_forest_model.predict(X_test)
-        r2_flour_rf = r2_score(y_test[:, 0], y_pred_rf[:, 0])
-        r2_sugar_rf = r2_score(y_test[:, 1], y_pred_rf[:, 1])
-        r2_butter_rf = r2_score(y_test[:, 2], y_pred_rf[:, 2])
+    y_pred_rf = random_forest_model.predict(X_test)
+    r2_flour_rf = r2_score(y_test[:, 0], y_pred_rf[:, 0])
+    r2_sugar_rf = r2_score(y_test[:, 1], y_pred_rf[:, 1])
+    r2_butter_rf = r2_score(y_test[:, 2], y_pred_rf[:, 2])
 
     print(f"R² Scores - Flour: {r2_flour_rf}, Sugar: {r2_sugar_rf}, Butter: {r2_butter_rf}")
     st.write(f"Flour Ratio R^2: {r2_flour_rf}")
