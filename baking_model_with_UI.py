@@ -92,12 +92,11 @@ else:
     st.warning("Image not available for this baked good.")
 
 filtered_dataset = baked_goods_dataset.loc[baked_goods_dataset['type'] == input_type].copy()
-filtered_dataset['flour_ratio'] = filtered_dataset['flour_ratio'].astype(float)
-st.write("Filtered dataset for selected baked good type:")
-st.write(filtered_dataset.head())
 scaler = StandardScaler()
 normalized_ratios = scaler.fit_transform(filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']])
-st.write(f"Normalized ratios: {normalized_ratios}")
+
+scaler = StandardScaler()
+normalized_ratios = scaler.fit_transform(filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']])
 print(filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']].isnull().sum())
 print(filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']].dtypes)
 print(filtered_dataset['flour_ratio'].unique())
@@ -129,18 +128,21 @@ else:
     X = np.hstack((type_encoded, texture_encoded, normalized_ratios))
     y = filtered_dataset[['flour_ratio', 'sugar_ratio', 'Butter_ratio']].values
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    st.write(f"First row of X_train: {X_train[0]}")
-    st.write(f"X_train shape: {X_train.shape}")
+    test_sizes = [0.1, 0.2, 0.4]
 
-    random_forest_model = MultiOutputRegressor(RandomForestRegressor(n_estimators=100, random_state=42))
-    random_forest_model.fit(X_train, y_train)
+    for test_size in test_sizes:
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+        print(f"Test size: {test_size}, Training data shape: {X_train.shape}, Testing data shape: {X_test.shape}")
 
-    y_pred_rf = random_forest_model.predict(X_test)
-    r2_flour_rf = r2_score(y_test[:, 0], y_pred_rf[:, 0])
-    r2_sugar_rf = r2_score(y_test[:, 1], y_pred_rf[:, 1])
-    r2_butter_rf = r2_score(y_test[:, 2], y_pred_rf[:, 2])
+        random_forest_model = MultiOutputRegressor(RandomForestRegressor(n_estimators=100, random_state=42))
+        random_forest_model.fit(X_train, y_train)
+    
+        y_pred_rf = random_forest_model.predict(X_test)
+        r2_flour_rf = r2_score(y_test[:, 0], y_pred_rf[:, 0])
+        r2_sugar_rf = r2_score(y_test[:, 1], y_pred_rf[:, 1])
+        r2_butter_rf = r2_score(y_test[:, 2], y_pred_rf[:, 2])
 
+    print(f"R² Scores - Flour: {r2_flour_rf}, Sugar: {r2_sugar_rf}, Butter: {r2_butter_rf}")
     st.write(f"Flour Ratio R^2: {r2_flour_rf}")
     st.write(f"Sugar Ratio R^2: {r2_sugar_rf}")
     st.write(f"Butter Ratio R^2: {r2_butter_rf}")
@@ -160,11 +162,9 @@ else:
         example_base_ratios = scaler.transform([[flour_ratio, sugar_ratio, butter_ratio]])
         user_input_texture = mlb.transform([[input_texture]])
         user_input_texture = mlb.transform([[input_texture]])
-        st.write(f"Encoded texture (MLB): {user_input_texture}")
         user_input = np.hstack((type_encoded[0], user_input_texture[0], example_base_ratios[0]))
         user_input = user_input.reshape(1, -1)
-        st.write(f"user_input (features for prediction): {user_input}")
-        st.write(f"user_input shape: {user_input.shape}")
+
 
 
         predicted_ratios = random_forest_model.predict(user_input)
