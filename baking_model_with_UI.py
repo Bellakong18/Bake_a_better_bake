@@ -215,7 +215,7 @@ else:
         ax.set_title(f'{ratio_x.replace('_', ' ').capitalize()} vs. {ratio_y.replace("_", " ").capitalize()} for {input_type}')
         ax.legend()
 
-        st.plot(fig1)
+        st.pyplot(fig1)
     else: 
         st.warning("Please select exactly two ratios to plot.")
     
